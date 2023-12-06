@@ -331,47 +331,35 @@ $(document).ready(function () {
     }
 
 
-    // Funktion, die Dokumente anhand von Tags filtert
+    //Dokumente nach Tags filtern
     function filterDocumentsByTags(page) {
-
-        // Liest Werte von verschiedenen Eingabeelementen auf der Webseite
         var searchQuery = $('#searchQuery').val();
         var selecteUser = $('#userSelect').val();
         var selectedTags = $('#selectTags').val();
         var dateFrom = $('#datepicker-from').val();
         var dateTo = $('#datepicker-to').val();
-
-        var parameterValue;
         var page = parseInt(page);
-
-        // Initialisiert ein leeres Objekt, das die Daten enthält, die an den Server gesendet werden sollen
         var dataToSend = {};
 
-        // Fügt Suchanfrage hinzu, wenn sie mindestens 4 Zeichen lang ist
         if (searchQuery && searchQuery.length >= 4) {
             dataToSend.search_query = searchQuery;
         }
 
-        // Fügt ausgewählte Tags hinzu
         if (selectedTags && selectedTags.length > 0) {
             dataToSend.selected_tags = selectedTags;
         }
 
-        // Fügt ausgewähltes User hinzu
         if (selecteUser && selecteUser.length > 0) {
             dataToSend.selecteUser = selecteUser;
         }
 
-        // Überprüft, ob die Datumsangaben gültig sind, und fügt sie hinzu
         var dateFromMoment = moment(dateFrom, 'DD.MM.YYYY');
         var dateToMoment = moment(dateTo, 'DD.MM.YYYY');
         if (dateFromMoment.isValid() && dateToMoment.isValid()) {
-            // Wenn die Datumsangaben gültig sind, in das richtige Format konvertieren
             dataToSend.date_from = dateFromMoment.format('YYYY-MM-DD');
             dataToSend.date_to = dateToMoment.format('YYYY-MM-DD');
         }
 
-        // Sendet eine AJAX-Anfrage an den Server
         $.ajax({
             url: '/documents/list/',
             method: 'GET',
