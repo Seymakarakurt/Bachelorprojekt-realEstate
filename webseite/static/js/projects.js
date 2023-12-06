@@ -1,31 +1,30 @@
 // Warten bis das Dokument vollständig geladen ist
 $(document).ready(function () {
-
   //Parameter enziehen bei Projekt
-  function projectParameterRemove(){
-      // Überprüfen, ob der Parameter vorhanden ist
-      if (window.location.search.indexOf('projekt_open_modal=true') !== -1) {
-        // Entfernen Sie den Parameter aus der URL
-        var newUrl = window.location.href.replace('?projekt_open_modal=true', '');
+  function projectParameterRemove() {
+    // Überprüfen, ob der Parameter vorhanden ist
+    if (window.location.search.indexOf("projekt_open_modal=true") !== -1) {
+      // Entfernen Sie den Parameter aus der URL
+      var newUrl = window.location.href.replace("?projekt_open_modal=true", "");
 
-        // Verwenden Sie history.pushState, um die URL zu ändern
-        history.pushState({}, document.title, newUrl);
+      // Verwenden Sie history.pushState, um die URL zu ändern
+      history.pushState({}, document.title, newUrl);
 
-        // Aktualisieren Sie die Seite
-        location.reload();
+      // Aktualisieren Sie die Seite
+      location.reload();
     }
   }
 
   var myDropzone;
-  
+
   Dropzone.options.dropzone = {
     init: function () {
       myDropzone = this; // Speichern Sie die Dropzone-Instanz in der Variable
-    }
-  }
+    },
+  };
 
   //Parameter enziehen bei Projekt funktions auslöser
-  $('#closProjekt').click(function () {
+  $("#closProjekt").click(function () {
     projectParameterRemove();
     if (myDropzone) {
       // Deaktivieren Sie die Dropzone und entfernen Sie alle Dateien
@@ -33,7 +32,6 @@ $(document).ready(function () {
       myDropzone.removeAllFiles();
     }
   });
-
 
   // Funktion zur Abfrage eines Cookies mit einem bestimmten Namen
   const getCookie = (name) => {
@@ -121,7 +119,7 @@ $(document).ready(function () {
   $("#delete-button").on("click", function () {
     // Hole die Projekt-ID aus dem Input-Feld mit der ID 'proectDeleteID'
     var project_id = $("#proectDeleteID").val();
-    console.log(project_id)
+    console.log(project_id);
     // Rufe die Funktion deleteProject mit der Projekt-ID als Argument auf
     deleteProject(project_id);
   });
@@ -189,32 +187,40 @@ $(document).ready(function () {
 
         for (var username in projectUsers) {
           if (projectUsers.hasOwnProperty(username)) {
-            console.log("Benutzername:", username, "Wert:", projectUsers[username]);
-        
+            console.log(
+              "Benutzername:",
+              username,
+              "Wert:",
+              projectUsers[username]
+            );
+
             // Erstellen Sie ein Objekt für die Select2-Option
             var option = {
-              id: username,    // Eindeutige ID für die Option
-              text: username   // Anzeigetext der Option
+              id: username, // Eindeutige ID für die Option
+              text: username, // Anzeigetext der Option
             };
-        
+
             // Überprüfen Sie, ob der Benutzer dem Projekt zugewiesen ist und setzen Sie selected auf true, falls zutreffend
             if (projectUsers[username]) {
               option.selected = true;
             }
-        
+
             // Fügen Sie die Option zum Array der Select2-Optionen hinzu
             select2Options.push(option);
           }
         }
-        
+
         // Verwenden Sie das Select2-Plugin, um das Dropdown-Feld zu initialisieren
         selectField.select2({
           theme: "bootstrap-5",
-          width: selectField.data('width') ? selectField.data('width') : selectField.hasClass('w-100') ? '100%' : 'style',
-          placeholder: selectField.data('placeholder'),
-          data: select2Options // Verwenden Sie das Array der Select2-Optionen
+          width: selectField.data("width")
+            ? selectField.data("width")
+            : selectField.hasClass("w-100")
+            ? "100%"
+            : "style",
+          placeholder: selectField.data("placeholder"),
+          data: select2Options, // Verwenden Sie das Array der Select2-Optionen
         });
-
       },
       error: function () {
         // Logge Fehlermeldung bei Fehlschlag
@@ -258,7 +264,7 @@ $(document).ready(function () {
           $("#exampleModalToggle").modal("hide");
         } else {
           // Logge Fehlermeldung, wenn die Aktualisierung nicht erfolgreich war
-          console.error('Fehler bei der Aktualisierung des Projekts.');
+          console.error("Fehler bei der Aktualisierung des Projekts.");
         }
       },
       error: function () {
@@ -321,7 +327,7 @@ $(document).ready(function () {
           // Aktion für das Entfernen
           // Hier könnten weitere Aktionen folgen
         }
-      
+
         // Aktualisieren der Seite
         location.reload();
       },
@@ -364,7 +370,7 @@ $(document).ready(function () {
         // Markiere das aktuelle Projekt als aktiv
         var elementToActivate = $('[data-projekt="' + project_id + '"]');
         elementToActivate.addClass("active");
-        
+
         // Füge Kommentare hinzu
         data.comments.forEach(function (document) {
           // Erstelle das HTML für die Kommentare
@@ -373,7 +379,11 @@ $(document).ready(function () {
                     <figure>
                     <figcaption class="blockquote-footer">
                         <cite title="Source Title" class="user-name">
-                        ${document.user} ${ document.can_edit ? `<i data-comment-id="${document.id}" class="update-comment-data fa-regular fa-pen-to-square"></i> <i data-comment-id="${document.id}" class="comment-delete-data fa-solid fa-trash"></i>` : ""} 
+                        ${document.user} ${
+            document.can_edit
+              ? `<i data-comment-id="${document.id}" class="update-comment-data fa-regular fa-pen-to-square"></i> <i data-comment-id="${document.id}" class="comment-delete-data fa-solid fa-trash"></i>`
+              : ""
+          } 
                         </cite>
                     </figcaption>
                     </figure>
@@ -394,19 +404,19 @@ $(document).ready(function () {
         viewDescriptionProject.text(data.description);
         viewNameProject.text(data.name);
 
-        console.log(data.can_edit)
+        console.log(data.can_edit);
 
         // Entscheide, welche Bearbeitungsoptionen angezeigt werden sollen
         if (data.can_edit) {
           $("#updateProjekt").removeClass("d-none");
           $("#crateComment").removeClass("d-none");
-        }else{
+        } else {
           $("#trashDelete").addClass("d-none");
           $("#updateProjekt").addClass("d-none");
         }
 
         // Superadmin kann alles bearbeiten und Löschen
-        if(data.can_delete){
+        if (data.can_delete) {
           $("#crateComment").removeClass("d-none");
           $("#trashDelete").removeClass("d-none");
           $("#updateProjekt").removeClass("d-none");
@@ -418,7 +428,10 @@ $(document).ready(function () {
         $("#multiple-select-field").empty();
         $("#viewTeamProject").empty();
         for (var username in data.project_users) {
-          if (data.project_users.hasOwnProperty(username) && data.project_users[username] === true) {
+          if (
+            data.project_users.hasOwnProperty(username) &&
+            data.project_users[username] === true
+          ) {
             // Erstellen ein HTML-Element für den Benutzer und fügen Sie es dem Element hinzu
             count++; // Zählvariable erhöhen
 
@@ -461,10 +474,14 @@ $(document).ready(function () {
   });
 
   // Standard-Liste beim Laden der Seite anzeigen
-  
 
   // Projekt list View
-  function updateProjectList( searchQuery = "", userProjects = false, watchlistProjects = false, assignedProjects = false) {
+  function updateProjectList(
+    searchQuery = "",
+    userProjects = false,
+    watchlistProjects = false,
+    assignedProjects = false
+  ) {
     $.ajax({
       url: "/project/project-list/",
       method: "GET",
@@ -501,9 +518,11 @@ $(document).ready(function () {
         } else {
           // Anzeige aller anderen Projekte
           $.each(projects, function (index, project) {
-              var extraClass = project.is_on_watchlist ? 'marked' : '';
-              var bookmarkStyle = project.is_on_watchlist ? 'style="color:red;"' : ''; // Rote Farbe, wenn auf der Watchlist
-              var projectListHtml = `
+            var extraClass = project.is_on_watchlist ? "marked" : "";
+            var bookmarkStyle = project.is_on_watchlist
+              ? 'style="color:red;"'
+              : ""; // Rote Farbe, wenn auf der Watchlist
+            var projectListHtml = `
               <a href="javascript:void(0);" data-projekt="${project.id}" class="list-group-item list-view list-group-item-action py-3 lh-tight ${extraClass}">
                   <div class="d-flex w-100 align-items-center justify-content-between">
                       <strong class="mb-1">${project.name}</strong>
@@ -512,7 +531,7 @@ $(document).ready(function () {
                   <div class="col-10 mb-1 small">${project.user}  ${project.create}</div>
               </a>
               `;
-              projectList.append(projectListHtml);
+            projectList.append(projectListHtml);
           });
         }
       },
@@ -543,10 +562,9 @@ $(document).ready(function () {
   if (meineProjekteParameter === "true") {
     var searchQuery = $("#exampleFormControlInput1").val();
     updateProjectList(searchQuery, true, false, false);
-  }else{
+  } else {
     updateProjectList();
   }
-
 
   // Event für den Button "Benutzerprojekte"
   $(".nav-link-user-projects").on("click", function () {
@@ -565,7 +583,7 @@ $(document).ready(function () {
   });
 
   // Mir zugewiesen Projekte
-  $('#assignedProjects').on('click', function (){
+  $("#assignedProjects").on("click", function () {
     updateProjectList(searchQuery, false, false, true);
   });
 
@@ -596,8 +614,6 @@ $(document).ready(function () {
       resetMeineProjekteParameter();
     });
 
-
-
   // Event für den "Schließen"-Button eines Projekts
   $("#closProjekt").on("click", function () {
     // Setze alle Eingabefelder zurück
@@ -615,28 +631,24 @@ $(document).ready(function () {
     location.reload();
   });
 
-  // Event für den "Projekt speichern"-Button
+  // Projekt speichern
   var projectId;
   $("#submit-button").on("click", function (e) {
-    e.preventDefault(); // Verhindere den Standard-Submit des Formulars
+    e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    // Sammle die Daten aus den Eingabefeldern
     var user_id = $("#user_id").val();
     var projektname = $("#projektname").val();
     var selectedUsers = $("#multiple-select-field").val();
     var description = $("#description").val();
 
-    // Überprüfe, ob die erforderlichen Felder ausgefüllt sind
     if (!validateForm()) {
       return;
     }
 
-
-    // AJAX-Anfrage, um das Projekt zu erstellen
     $.ajax({
       url: "/project/create-project/",
       method: "POST",
@@ -650,8 +662,7 @@ $(document).ready(function () {
         description: description,
       },
       success: function (data) {
-        // Erfolgreiche Erstellung des Projekts
-        projectId = data.project_id; // Speichere die Projekt-ID
+        projectId = data.project_id;
 
         // Ändere die Sichtbarkeit von Elementen
         $("#dropzone").removeClass("d-none");
@@ -680,7 +691,6 @@ $(document).ready(function () {
       },
     });
   });
-
 
   // Initialisierung der Dropzone für Datei-Uploads
   function initializeDropzone() {
@@ -716,96 +726,92 @@ $(document).ready(function () {
     });
   }
 
+  // Funktion, die beim Öffnen des Modals aufgerufen wird
+  var myModal = $("#exampleModalToggle");
+  myModal.on("show.bs.modal", function (e) {
+    setTimeout(performAjaxSearch, 100);
+  });
 
+  // Funktion, die den AJAX-Aufruf ausführt wen es einen wert gibt ansonsten nicht
+  function performAjaxSearch() {
+    var valprojektname = $("#projektname").val();
+    if (valprojektname === "") {
+      $.ajax({
+        method: "GET",
+        url: "/project/autocomplete/user/", // URL für die Autocomplete-Suche
+        success: function (data) {
+          var results = data.results; // Die Suchergebnisse
 
-    // Funktion, die beim Öffnen des Modals aufgerufen wird
-    var myModal = $('#exampleModalToggle');
-    myModal.on('show.bs.modal', function (e) {
+          var select2Options = [];
 
-      setTimeout(performAjaxSearch, 100);
-        
-    });
+          // Iterieren Sie durch die Ergebnisse und erstellen Sie Optionen für Select2
+          for (var i = 0; i < results.length; i++) {
+            var user = results[i];
+            var username = user.username;
 
-    // Funktion, die den AJAX-Aufruf ausführt wen es einen wert gibt ansonsten nicht
-    function performAjaxSearch() {
-      var valprojektname = $('#projektname').val();
-      if (valprojektname === '') {
-        $.ajax({
-          method: "GET",
-          url: "/project/autocomplete/user/", // URL für die Autocomplete-Suche
-          success: function (data) {
-            var results = data.results; // Die Suchergebnisse
+            // Erstellen Sie ein Objekt für die Option
+            var option = {
+              id: username,
+              text: username,
+            };
 
-  
+            // Fügen Sie die Option zum Array der Select2-Optionen hinzu
+            select2Options.push(option);
+          }
 
-            var select2Options = [];
-
-            // Iterieren Sie durch die Ergebnisse und erstellen Sie Optionen für Select2
-            for (var i = 0; i < results.length; i++) {
-                var user = results[i];
-                var username = user.username;
-
-                // Erstellen Sie ein Objekt für die Option
-                var option = {
-                    id: username,
-                    text: username
-                };
-
-                // Fügen Sie die Option zum Array der Select2-Optionen hinzu
-                select2Options.push(option);
-            }
-
-            // Leeren Sie das Dropdown-Feld und fügen Sie Select2-Optionen hinzu
-            $("#multiple-select-field").empty().select2({
-                theme: "bootstrap-5",
-                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
-                placeholder: $( this ).data( 'placeholder' ),
-                data: select2Options // Verwenden Sie das Array der Select2-Optionen
+          // Leeren Sie das Dropdown-Feld und fügen Sie Select2-Optionen hinzu
+          $("#multiple-select-field")
+            .empty()
+            .select2({
+              theme: "bootstrap-5",
+              width: $(this).data("width")
+                ? $(this).data("width")
+                : $(this).hasClass("w-100")
+                ? "100%"
+                : "style",
+              placeholder: $(this).data("placeholder"),
+              data: select2Options, // Verwenden Sie das Array der Select2-Optionen
             });
-    
-            
-          },
-        });
-      }
+        },
+      });
     }
-
+  }
 
   // Prjket Formular Evaluierung
   function validateForm() {
     var projektname = $("#projektname").val();
     var description = $("#description").val();
     var selectedUsers = $("#multiple-select-field").val();
-  
-    if (!projektname || projektname.trim() === '') {
+
+    if (!projektname || projektname.trim() === "") {
       displayErrorMessage("Projektnamen ist erforderlich.");
       return false;
     }
-  
-    if (!description || description.trim() === '') {
+
+    if (!description || description.trim() === "") {
       displayErrorMessage("Beschreibung ist erforderlich.");
       return false;
     }
-  
-  
+
     // Wenn alles ausgefüllt ist und die Validierung erfolgreich ist, wird true zurückgegeben.
     return true;
   }
 
-
-  $("#projektname, #description, #multiple-select-field").on("input change", function () {
-    hideErrorMessage();
-  });
+  $("#projektname, #description, #multiple-select-field").on(
+    "input change",
+    function () {
+      hideErrorMessage();
+    }
+  );
 
   function displayErrorMessage(message) {
     // Zeige die Fehlermeldung und setze den Text entsprechend
     $("#error-message").text(message);
     $("#error-message").show();
   }
-  
+
   function hideErrorMessage() {
     // Verstecke die Fehlermeldung
     $("#error-message").hide();
   }
-
-
 });
