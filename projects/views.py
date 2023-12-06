@@ -124,51 +124,36 @@ class ProjectUpdateJsonView(View): #UpdateProject
 class ProjectDetailView(View):
     def get(self, request, project_id):
         try:
-            # Holt das Projekt aus der Datenbank.
             project = Project.objects.get(id=project_id)
-            
-            #Alle User
             all_users = User.objects.all()
-            
-            # Extrahiere die Benutzerliste aus dem UserProfile-Modell
             all_user_profiles = UserProfile.objects.all()
             all_users = [user_profile.user for user_profile in all_user_profiles]
-            
-            # Holen Sie sich alle Benutzer, die dem Projekt zugewiesen sind
             assigned_users = project.users.all()
-            assigned_usernames = set(user.user.username for user in assigned_users)
-
-                        
-            # Erstelle ein Dictionary, um Benutzer und deren Zuweisungsstatus zu speichern
+            assigned_usernames = set(user.user.username for user in assigned_users)    
             users_with_assignment = {}
 
-            # Iteriere durch alle Benutzer und überprüfe, ob sie zugewiesen sind
             for user in all_users:
                 username = user.username
                 assigned = username in assigned_usernames
                 users_with_assignment[username] = assigned
             
-            # Extrahiert relevante Informationen von dem Projekt und den zugehörigen Entitäten.
             username = project.user.username if project.user else ""
             user_id = project.user.id if project.user else ""
             
-            # Holt alle Dokumente, die zu diesem Projekt gehören.
             documents = Documents.objects.filter(project=project)
             documents_data = [{'name': doc.name, 'create': doc.create.strftime('%Y-%m-%d %H:%M:%S')} for doc in documents]
 
-            # Holt alle Kommentare, die zu diesem Projekt gehören.
             comments = Comment.objects.filter(project=project)
-            comments_data = [{'text': comment.text, 'id': comment.id, 'user': comment.user.username, 'date': comment.date.strftime('%d.%m.%Y %H:%M'), 'can_edit': comment.user == request.user} for comment in comments]
+            comments_data = [{'text': comment.text, 'id': comment.id, 'user': comment.user.username,
+                              'date': comment.date.strftime('%d.%m.%Y %H:%M'),
+                              'can_edit': comment.user == request.user} for comment in comments]
             
-            # Überprüfen, ob der Benutzer das Projekt bearbeiten darf, aber nicht löschen darf.
             assigned_usernames = set(user.user.username for user in assigned_users)
             cleaned_user = str(request.user).strip()
             can_edit_project = (cleaned_user in assigned_usernames)
             
-            # Der Super user darf löschen
             can_delete_project = request.user.is_superuser or project.user == request.user
             
-            # Erstellt ein Dictionary mit allen relevanten Daten.
             project_data = {
                 'name': project.name,
                 'description': project.description,
@@ -183,10 +168,8 @@ class ProjectDetailView(View):
                 'project_users': users_with_assignment,
             }
 
-            # Gibt die gesammelten Daten als JSON zurück.
             return JsonResponse(project_data)
         except Project.DoesNotExist:
-            # Wenn das Projekt nicht gefunden wird, gibt es eine Fehlermeldung zurück.
             return JsonResponse({'error': 'Projekt nicht gefunden.'}, status=404)
 
 
