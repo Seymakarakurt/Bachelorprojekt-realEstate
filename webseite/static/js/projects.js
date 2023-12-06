@@ -338,42 +338,31 @@ $(document).ready(function () {
     });
   });
 
-  // Funktion für die Anzeige der Projektdetails
+  // Stammdaten in der Projektansicht anzeigen
   function deatileViewProjekt(project_id) {
-    // Entferne die "active"-Klasse von allen Projekt-Elementen
     $("[data-projekt]").removeClass("active");
 
-    // Initialisiere DOM-Elemente
     var creatorProjektView = $("#creatorProjektView");
     var viewNameProject = $("#viewNameProject");
     var viewDescriptionProject = $("#viewDescriptionProject");
     var DocumentsButton = $("#DocumentsButton");
 
-    // Setze das aktuelle Projekt für die Bookmark-Funktion
     $(".project").attr("data-project-bookmark", project_id);
 
-    // Ändere die Anzeigeoptionen
     $(".myHideClass").removeClass("d-none");
     $(".myViewClass").addClass("d-none");
 
-    // Speichere die Projekt-ID für spätere Verwendung
     $("#updateProjekt").attr("data-projekt-id", project_id);
 
-    // AJAX-Anfrage, um die Projektdetails abzurufen
     $.ajax({
       url: "/project/project-detail/" + project_id + "/",
       method: "GET",
       success: function (data) {
-        // Leere den Kommentarbereich
         $("#commentsContainer").empty();
 
-        // Markiere das aktuelle Projekt als aktiv
         var elementToActivate = $('[data-projekt="' + project_id + '"]');
         elementToActivate.addClass("active");
-
-        // Füge Kommentare hinzu
         data.comments.forEach(function (document) {
-          // Erstelle das HTML für die Kommentare
           var htmlComments = `
                 <div class="col-12 mt-5">
                     <figure>
@@ -381,7 +370,8 @@ $(document).ready(function () {
                         <cite title="Source Title" class="user-name">
                         ${document.user} ${
             document.can_edit
-              ? `<i data-comment-id="${document.id}" class="update-comment-data fa-regular fa-pen-to-square"></i> <i data-comment-id="${document.id}" class="comment-delete-data fa-solid fa-trash"></i>`
+              ? `<i data-comment-id="${document.id}"class="update-comment-data fa-regular fa-pen-to-square"></i>
+              <i data-comment-id="${document.id}" class="comment-delete-data fa-solid fa-trash"></i>`
               : ""
           } 
                         </cite>
