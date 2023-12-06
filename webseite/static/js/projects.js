@@ -396,7 +396,7 @@ $(document).ready(function () {
 
         console.log(data.can_edit);
 
-        // Entscheide, welche Bearbeitungsoptionen angezeigt werden sollen
+        // Zugriffsrechte
         if (data.can_edit) {
           $("#updateProjekt").removeClass("d-none");
           $("#crateComment").removeClass("d-none");
@@ -405,15 +405,12 @@ $(document).ready(function () {
           $("#updateProjekt").addClass("d-none");
         }
 
-        // Superadmin kann alles bearbeiten und Löschen
         if (data.can_delete) {
           $("#crateComment").removeClass("d-none");
           $("#trashDelete").removeClass("d-none");
           $("#updateProjekt").removeClass("d-none");
         }
 
-        // Zeige den Teamnamen oder eine Ersatzmeldung an
-        // *** Team wurde gelsöcht ***
         var count = 0;
         $("#multiple-select-field").empty();
         $("#viewTeamProject").empty();
@@ -422,22 +419,17 @@ $(document).ready(function () {
             data.project_users.hasOwnProperty(username) &&
             data.project_users[username] === true
           ) {
-            // Erstellen ein HTML-Element für den Benutzer und fügen Sie es dem Element hinzu
-            count++; // Zählvariable erhöhen
+            count++;
 
-            // Überprüfen, ob es sich um das zweite Element (count gleich 2) handelt
             if (count > 1) {
-              // Fügen Sie die Klasse mx-1 hinzu
               var htmlUser = `<div class="mx-1">,${username}</div>`;
             } else {
-              // Andernfalls fügen das HTML-Element ohne die Klasse hinzu
               var htmlUser = `<div>${username}</div>`;
             }
             $(htmlUser).appendTo("#viewTeamProject");
           }
         }
 
-        // Zeige den Dokumentenbutton an, wenn Dokumente vorhanden sind
         if (data.documents && data.documents.length > 0) {
           DocumentsButton.html(
             '<a href="/documents/?projekt_id=' +
@@ -449,7 +441,6 @@ $(document).ready(function () {
         }
       },
       error: function () {
-        // Fehlerbehandlung
         console.log("Fehler beim Abrufen der Projektinformationen.");
       },
     });
