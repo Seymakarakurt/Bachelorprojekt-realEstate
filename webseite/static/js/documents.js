@@ -395,7 +395,6 @@ $(document).ready(function () {
           documentId = element.id;
           checkDocumentsWatchlistStatus(userLogin, documentId);
 
-          // Aktualisiert die Dokumentenkarten auf der Webseite
           htmlCard = `
                     <div class="col-md-4 col-12 mb-4">
                         <div class="card card-custom h-100">
@@ -444,12 +443,9 @@ $(document).ready(function () {
           documentsRow.append(htmlCard);
         });
         documentsCards.append(documentsRow);
-
-        // Aktualisiert die Paginierungslinks
         createPaginationLinks(data.page_count);
       },
       error: function (error) {
-        // Verarbeiten Sie Fehler, wenn der Ajax-Aufruf fehlschlägt
         console.error("Fehler beim Abrufen der Dokumente: " + error.statusText);
       },
     });
