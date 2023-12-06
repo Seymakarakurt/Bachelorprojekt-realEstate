@@ -653,7 +653,7 @@ $(document).ready(function () {
       url: "/project/create-project/",
       method: "POST",
       headers: {
-        "X-CSRFToken": csrftoken, // CSRF-Token für Sicherheit
+        "X-CSRFToken": csrftoken,
       },
       data: {
         user_id: user_id,
