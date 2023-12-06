@@ -15,23 +15,17 @@ from django.utils.decorators import method_decorator
 from webseite.models import UserProfile
         
 
-# Klasse zum Löschen eines Projekts
 class ProjectDeleteJsonView(View):
     def get(self, request, pk):
-        # Holt das Projekt anhand der Primärschlüssel-ID
         project = get_object_or_404(Project, pk=pk)
-        
-        # Gibt Projektname und Projekt-ID für die JSON-Antwort zurück
         project_name = project.name
         project_id = project.id
         return JsonResponse({'project_name': project_name, 'project_id': project_id})
     
     def post(self, request, pk):
-        # Holt das Projekt anhand der Primärschlüssel-ID und löscht es
         project = get_object_or_404(Project, pk=pk)
         project.delete()
         
-        # Gibt eine erfolgreiche JSON-Antwort zurück
         return JsonResponse({'message': 'Projekt erfolgreich gelöscht.'})
 
 
