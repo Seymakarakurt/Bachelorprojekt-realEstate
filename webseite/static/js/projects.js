@@ -33,39 +33,26 @@ $(document).ready(function () {
     }
   });
 
-  // Funktion zur Abfrage eines Cookies mit einem bestimmten Namen
   const getCookie = (name) => {
-    // Initialisiere cookieValue mit null
     let cookieValue = null;
 
-    // Überprüfe, ob Cookies überhaupt vorhanden sind
     if (document.cookie && document.cookie !== "") {
-      // Zerlege den Cookie-String in ein Array
       const cookies = document.cookie.split(";");
 
-      // Durchlaufe alle Cookies
       for (let i = 0; i < cookies.length; i++) {
-        // Entferne eventuelle Leerzeichen am Anfang und am Ende des Cookie-Strings
         const cookie = cookies[i].trim();
 
-        // Überprüfe, ob der Cookie-String mit dem gesuchten Namen beginnt
         if (cookie.substring(0, name.length + 1) === name + "=") {
-          // Extrahiere den Wert des Cookies und dekodiere ihn
           cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          // Breche die Schleife ab, da der gesuchte Cookie gefunden wurde
           break;
         }
       }
     }
-    // Gib den Wert des gesuchten Cookies zurück (oder null, falls nicht gefunden)
     return cookieValue;
   };
-  // Hole den CSRF-Token aus dem Cookie 'csrftoken'
   const csrftoken = getCookie("csrftoken");
-  // csrftoken wird nun für AJAX-Anfragen verwendet, um Sicherheitsrisiken zu minimieren
 
   function openModalIfParameterExists() {
-    // Holen des URL-Parameters
     var urlParams = new URLSearchParams(window.location.search);
     var openModal = urlParams.get("projekt_open_modal");
     if (openModal === "true") {
