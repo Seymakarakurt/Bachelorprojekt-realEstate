@@ -35,3 +35,4 @@ urlpatterns = [
     path('list/', DocumentsListJsonView.as_view(), name='documents_view_list'),
     path('', DocumentsListView.as_view(), name='documents_view_list'),
 ]
+
