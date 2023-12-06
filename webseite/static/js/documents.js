@@ -451,12 +451,10 @@ $(document).ready(function () {
     });
   }
 
-  // Wenn das Tags-Auswahlfeld geändert wird, rufe filterDocumentsByTags() auf
   $("#selectTags").change(function () {
     filterDocumentsByTags();
   });
 
-  // Wenn das "Von"-Datumsfeld geändert wird, überprüfe, ob auch ein "Bis"-Datum vorhanden ist und rufe dann filterDocumentsByTags() auf
   $("#datepicker-from").change(function () {
     var dateFrom = $(this).val();
     var dateTo = $("#datepicker-to").val();
@@ -466,7 +464,6 @@ $(document).ready(function () {
     }
   });
 
-  // Wenn das "Bis"-Datumsfeld geändert wird, überprüfe, ob auch ein "Von"-Datum vorhanden ist und rufe dann filterDocumentsByTags() auf
   $("#datepicker-to").change(function () {
     var dateFrom = $("#datepicker-from").val();
     var dateTo = $(this).val();
@@ -476,7 +473,6 @@ $(document).ready(function () {
     }
   });
 
-  // Wenn im Suchfeld mindestens 4 Zeichen eingegeben werden, rufe filterDocumentsByTags() auf
   $("#searchQuery").keyup(function () {
     var searchQuery = $(this).val();
     if (searchQuery.length >= 4) {
@@ -484,7 +480,6 @@ $(document).ready(function () {
     }
   });
 
-  // Wenn das Team-Auswahlfeld geändert wird, rufe filterDocumentsByTags() auf
   $("#userSelect").change(function () {
     filterDocumentsByTags();
   });
