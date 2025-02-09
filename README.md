@@ -16,10 +16,6 @@
 # Schritt: Pillow:
     python -m pip install Pillow
 
-# Admin
-    Benutzer: Seyma
-    Passwort: Berlin1530
-
 # APPS
  - Webseite App
  - Project App
