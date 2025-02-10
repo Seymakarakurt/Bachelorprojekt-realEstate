@@ -1,38 +1,36 @@
-from django.contrib import admin
 from django.urls import path
 
-from .views import (DocumentsListView,
-                    ProjectsAutocomplete,
+from .views import (DocumentCreateView,
+                    DocumentUpdateView,
+                    DocumentDeleteView,
+                    DocumentFilterView,
+                    ProjectsAutocompleteView,
+                    TagCreateView,
+                    TagUpdateView,
+                    TagDeleteView,
+                    TagListView,
                     TagsAutocompleteView,
-                    DocumentsCreateJsonView,
-                    TagsListView,
                     UserListView,
-                    DocumentsListJsonView,
-                    DocumentsUpdateView,
-                    DocumentsDeleteJsonView,
-                    DocumentsListToggleView,
-                    TagsCreateView,
-                    TagsUpdateView,
-                    TagsDeleteView,
-                    CheckWatchlistStatusDocumentsView
+                    DocumentArchiveView,
+                    DocumentWatchView,
+                    DocumentInWatchlistView
                     )
 
 app_name = 'documents'
 
 urlpatterns = [
-    path('check-watchlist-status/<int:user_id>/<int:project_id>/', CheckWatchlistStatusDocumentsView.as_view(), name='watchlist_documents'),
-    path('autocomplete/projects/', ProjectsAutocomplete.as_view(), name='autocomplete_project'),
-    path('autocomplete/tags/', TagsAutocompleteView.as_view(), name='autocomplete_tags'),
-    path('update/tags/<pk>/', TagsUpdateView.as_view(), name='update_tags'),
-    path('delete/tags/<pk>/', TagsDeleteView.as_view(), name='delete_tags'),
-    path('update/<pk>/', DocumentsUpdateView.as_view(), name='update_documents'),
-    path('delete/<pk>/', DocumentsDeleteJsonView.as_view(), name='delete_documents'),
-    path('toggle-watchlist/', DocumentsListToggleView.as_view(), name='toggle-watchlist'),
-    path('create-tags/', TagsCreateView.as_view(), name='tags_create'),
-    path('tags/select/', TagsListView.as_view(), name='tags_select'),
-    path('user/select/', UserListView.as_view(), name='teams_select'),
-    path('create/', DocumentsCreateJsonView.as_view(), name='create_documents'),
-    path('list/', DocumentsListJsonView.as_view(), name='documents_view_list'),
-    path('', DocumentsListView.as_view(), name='documents_view_list'),
+    path('create/', DocumentCreateView.as_view(), name='document_create'),
+    path('update/<pk>/', DocumentUpdateView.as_view(), name='document_update'),
+    path('delete/<pk>/', DocumentDeleteView.as_view(), name='document_delete'),
+    path('filter/', DocumentFilterView.as_view(), name='document_filter'),
+    path('autocomplete-project/', ProjectsAutocompleteView.as_view(), name='autocomplete_projects'),
+    path('tag-create/', TagCreateView.as_view(), name='tag_create'),
+    path('tag-update/<pk>/', TagUpdateView.as_view(), name='tag_update'),
+    path('tag-delete/<pk>/', TagDeleteView.as_view(), name='tag_delete'),
+    path('tag-select/', TagListView.as_view(), name='tag_select'),
+    path('autocomplete-tags/', TagsAutocompleteView.as_view(), name='autocomplete_tags'),
+    path('user-select/', UserListView.as_view(), name='user_select'),
+    path('', DocumentArchiveView.as_view(), name='documents_view_list'),
+    path('watch/', DocumentWatchView.as_view(), name='document_watch'),
+    path('check-watchlist/<int:user_id>/<int:project_id>/', DocumentInWatchlistView.as_view(), name='document_watchlist'),
 ]
-

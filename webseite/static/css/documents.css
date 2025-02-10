@@ -25,19 +25,19 @@
     background-color: #45818e33;
 }
 
-.document-bookmark {
+.documentBookmark {
     font-size: 1.5rem;
     color: #45818e;
     cursor: pointer;
 }
 
-.document-bookmark:hover {
+.documentBookmark:hover {
     font-size: 1.5rem;
     color: #6d6d6d;
     cursor: pointer;
 }
 
-#documentsCards h5.card-title{
+#documentCards h5.card-title{
     font-size: 0.95rem; 
 }
 
@@ -58,7 +58,7 @@
     margin-bottom: 10px;
 }
 
-.watchlisted {
+.inWatchlist {
     color: red;
   }
 
@@ -69,5 +69,3 @@
     width: 100%;
     object-fit: cover;
   }
-  
-  

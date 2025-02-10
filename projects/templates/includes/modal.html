@@ -1,46 +1,47 @@
-<!-- Modal-Fenster zum Erstellen oder Bearbeiten von Projekten -->
+<!--Fenster erstellen oder bearbeiten von Projekten -->
 <div
   class="modal fade"
-  id="exampleModalToggle"
+  id="createProject"
   aria-hidden="true"
-  aria-labelledby="exampleModalToggleLabel"
+  aria-labelledby="createProjectLabel"
   tabindex="-1"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <!-- Modal Header mit Titel und Schließen-Button -->
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalToggleLabel">
+        <h5 class="modal-title" id="createProjectLabel">
           Neues Projekt anlegen
         </h5>
         <button
           type="button"
-          id="closProjekt"
+          id="closeProject"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
       </div>
-
-      <!--Formularfeld-->
       <div class="modal-body">
-        <div id="alertProjekt"></div>
+        <div id="alertProject"></div>
         <div
-          id="error-message"
+          id="errorAlert"
           class="alert alert-danger"
-          style="display: none"></div>
+          style="display: none"
+        ></div>
 
-        <input type="hidden" id="user_id" value="{{user_id}}"/>
-        <label for="projektname" class="form-label mt-4">Projektname</label>
+        <input type="hidden" id="user_id" value="{{user_id}}" />
 
-        <input type="text" id="projektname" class="form-control mb-3" />
-        <label for="projektname" class="form-label mt-4">Projekt zuweisen an</label>
+        <label for="projectName" class="form-label mt-4">Projektname</label>
+        <input type="text" id="projectName" class="form-control mb-3" />
 
+        <label for="projectName" class="form-label mt-4"
+          >Projekt zuweisen an</label
+        >
         <select
           class="form-select"
-          id="multiple-select-field"
+          id="projectAllocate"
           data-placeholder="Wählen Sie eine Option"
-          multiple></select>
+          multiple
+        ></select>
 
         <label for="description" class="form-label mt-4">Beschreibung</label>
         <textarea
@@ -48,16 +49,24 @@
           id="description"
           class="form-control"
           rows="12"
-          class="form-control"></textarea>
+          class="form-control"
+        ></textarea>
 
         <form method="post" enctype="multipart/form-data">
           <div id="dropzone" class="dropzone d-none"></div>
         </form>
       </div>
-
       <div class="modal-footer">
-        <button class="btn btn-primary" id="submit-button" type="submit">Speichern</button>
-        <button class="btn btn-primary d-none" id="update-button" type="submit">Projekt ändern</button>
+        <button class="btn btn-primary" id="saveButtonProject" type="submit">
+          Speichern
+        </button>
+        <button
+          class="btn btn-primary d-none"
+          id="updateButtonProject"
+          type="submit"
+        >
+          Projekt ändern
+        </button>
       </div>
     </div>
   </div>
