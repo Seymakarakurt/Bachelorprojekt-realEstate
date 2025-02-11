@@ -1,27 +1,22 @@
-# 📊 Portfoliomanagement-Software für die Immobilienbranche
-
-**Entwickelt im Rahmen einer Bachelorarbeit**  
-Autor: **Seyma Karakurt**  
-Betreuer: **Prof. Dr. Sven Graupner**  
-Datum: **01.01.2024**
+# Portfoliomanagement-Software für die Immobilienbranche
 
 ---
 
-## 🏡 Projektbeschreibung
+## Projektbeschreibung
 
 Diese Portfoliomanagement-Software wurde speziell für die **Immobilienbranche** entwickelt, um eine effizientere Verwaltung von **Projekten und Dokumenten** zu ermöglichen. Die Software bietet Funktionen wie:
 
-- 📂 **Digitale Verwaltung von Immobilienprojekten**
-- 🏷 **Zuweisung von Projekten an Mitarbeiter**
-- 🗂 **Dokumentenarchiv mit Such- und Filterfunktionen**
-- 💬 **Kommentare zur besseren internen Kommunikation**
-- 🔒 **Zugriffsrechte basierend auf Rollen**
+- **Digitale Verwaltung von Immobilienprojekten**
+- **Zuweisung von Projekten an Mitarbeiter**
+- **Dokumentenarchiv mit Such- und Filterfunktionen**
+- **Kommentare zur besseren internen Kommunikation**
+- **Zugriffsrechte basierend auf Rollen**
 
 Die Software basiert auf einem **Django-Backend** und nutzt **SQLite** für die Datenverwaltung. Das Frontend wurde mit **HTML, CSS, JavaScript** und **Bootstrap** umgesetzt.
 
 ---
 
-## 📸 Screenshots & Diagramme
+## Screenshots & Diagramme
 
 ### **Landing Page**
 ![Landing Page](screenshots/landingpage.jpg)
@@ -49,7 +44,7 @@ Die Software basiert auf einem **Django-Backend** und nutzt **SQLite** für die 
 
 ---
 
-## 🛠 Tech-Stack
+## Tech-Stack
 
 - **Backend:** Django (Python), SQLite
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap
@@ -58,7 +53,7 @@ Die Software basiert auf einem **Django-Backend** und nutzt **SQLite** für die 
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 1️⃣ **Repository klonen:**
 ```bash
@@ -96,29 +91,29 @@ Die Anwendung ist nun unter **http://127.0.0.1:8000/** erreichbar. 🎉
 
 ---
 
-## 📌 Features & Funktionen
+## Features & Funktionen
 
-✅ **Projektverwaltung**  
+**Projektverwaltung**  
 - Projekte erstellen, bearbeiten & löschen  
 - Zuweisung von Projekten an Mitarbeiter  
 - Verwaltung von Zugriffsrechten  
 
-✅ **Dokumentenarchiv**  
+**Dokumentenarchiv**  
 - Hochladen & Bearbeiten von Dokumenten  
 - Tags & Suchfunktionen  
 - Vorschau der Dokumente  
 
-✅ **Benutzer- & Rollenmanagement**  
+**Benutzer- & Rollenmanagement**  
 - Admin-Dashboard mit Benutzerverwaltung  
 - Rollenbasierte Zugriffssteuerung  
 
-✅ **Interne Kommunikation**  
+**Interne Kommunikation**  
 - Kommentarfunktion für jedes Projekt  
 - Realtime-Aktualisierungen  
 
 ---
 
-## 📂 Datenbankstruktur
+## Datenbankstruktur
 
 Ein Überblick über die **Datenbanktabellen**:
 
@@ -133,16 +128,10 @@ erDiagram
 
 ---
 
-## 🎯 Weiterentwicklung
+## Weiterentwicklung
 
 Geplante zukünftige Funktionen:
-- 📍 **Benachrichtigungssystem für Projektupdates**
-- 📊 **Detaillierte Analyse und Dashboard für KPIs**
-- 📱 **Mobile-freundliche Version**
-- 🔗 **Integration mit externen Systemen (z. B. Google Drive, Dropbox)**
-
----
-
-## 📜 Lizenz
-
-MIT License – Feel free to use and modify this project! 😊
+- **Benachrichtigungssystem für Projektupdates**
+- **Detaillierte Analyse und Dashboard für KPIs**
+- **Mobile-freundliche Version**
+- **Integration mit externen Systemen (z. B. Google Drive, Dropbox)**
