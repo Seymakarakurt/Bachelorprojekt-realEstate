@@ -135,3 +135,5 @@ Geplante zukünftige Funktionen:
 - **Detaillierte Analyse und Dashboard für KPIs**
 - **Mobile-freundliche Version**
 - **Integration mit externen Systemen (z. B. Google Drive, Dropbox)**
+
+  Entwickelt von Seyma Karakurt
